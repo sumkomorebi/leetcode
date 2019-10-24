@@ -1,0 +1,36 @@
+class Solution:
+    def intToRoman(self, num):
+        if not 1 <= num <= 3999:
+            return
+        ten = ''
+        hundred = ''
+        thousand = ''
+        n1 = num % 1000 % 500 % 100 % 50 % 10 % 5 // 1
+        n2 = num % 1000 % 500 % 100 % 50 % 10 // 5
+        n3 = num % 1000 % 500 % 100 % 50 // 10
+        n4 = num % 1000 % 500 % 100 // 50
+        n5 = num % 1000 % 500 // 100
+        n6 = num % 1000 // 500
+        n7 = num // 1000
+        if n1 == 4:
+            if n2 == 1:
+                ten = 'IX'
+            else:
+                ten = 'IV'
+        else:
+            ten = 'V' * n2 + 'I' * n1
+        if n3 == 4:
+            if n4 == 1:
+                hundred = 'XC'
+            else:
+                hundred = 'XL'
+        else:
+            hundred = 'L' * n4 + 'X' * n3
+        if n5 == 4:
+            if n6 == 1:
+                thousand = 'CM'
+            else:
+                thousand = 'CD'
+        else:
+            thousand = 'D' * n6 + 'C' * n5
+        return 'M' * n7 + thousand + hundred + ten

@@ -1,0 +1,30 @@
+# 给定两个整数，被除数 dividend 和除数 divisor。
+# 将两数相除，要求不使用乘法、除法和 mod 运算符。
+# 返回被除数 dividend 除以除数 divisor 得到的商。
+# 被除数和除数均为 32 位有符号整数。
+# 除数不为 0。
+# 假设我们的环境只能存储 32 位有符号整数，其数值范围是 [−231,  231 − 1]。
+# 本题中，如果除法结果溢出，则返回 231 − 1。
+
+
+class Solution:
+    def divide(self, dividend, divisor):
+        result = 0
+        p = 0
+        a = abs(dividend)
+        b = abs(divisor)
+        backup = b
+        while True:
+            if a >= b:
+                a -= b
+                result += 2 ** p
+                p += 1
+                b += b
+            else:
+                b = backup
+                p = 0
+            if a < backup:
+                break
+        if dividend < 0 and divisor > 0 or dividend >= 0 and divisor < 0:
+            return -max(result, -2147483648)
+        return min(result, 2147483647)

@@ -1,0 +1,22 @@
+思路1:
+把每个字母当成回文串的中心
+这里分两种情况，回文串长度为奇数或偶数的情况
+此算法时间复杂度为O(n^2)
+
+class Solution:
+    def longestPalindrome(self, s):
+        self.res = ''  # 此处必须是self.变量名
+        length = len(s)
+
+        def helper(i, j):
+            while i >= 0 and j < length and s[i] == s[j]:
+                i -= 1
+                j += 1
+            if j - i - 1 > len(self.res):
+                self.res = s[i + 1:j]
+
+        for i in range(0, len(s)):
+            helper(i, i)
+            helper(i, i + 1)
+
+        return self.res
